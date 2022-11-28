@@ -17,18 +17,17 @@ public class UserServiceImpl extends UserServiceImplBase {
 
   @Override
   public void readAndSendUsers(UserRequest request, StreamObserver<UsersResponse> responseObserver) {
-  //   List<User> users = new ArrayList<>();
-  //   CsvReader csvReader = new CsvReader();
-  //   try {
-  //     CsvUtil.parseFromCsv(csvReader.readFile(""));
+    List<User> users = new ArrayList<>();
+    CsvReader csvReader = new CsvReader();
+    try {
+    users =  CsvUtil.parseFromCsv(csvReader.readFile(""));
       
-  //   } catch (Exception e) {
-  //     e.printStackTrace();
-  //   }
-  //   // User user = User.newBuilder().
-  //   // UsersResponse response = UsersResponse.newBuilder().addUsers(users).build;
-  //   // responseObserver.onNext(response);
-  //   super.readAndSendUsers(request, responseObserver);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  UsersResponse response =  UsersResponse.newBuilder().addAllUsers(users).build();
+   responseObserver.onNext(response);
+    // super.readAndSendUsers(request, responseObserver);
   }
 
 
